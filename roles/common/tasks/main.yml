@@ -1,0 +1,8 @@
+- name: Install basic packages
+  dnf: >
+    state=latest
+    name={{ item }}
+  with_items:
+  - vim
+  - python3
+  - python

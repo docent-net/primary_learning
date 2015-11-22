@@ -1,0 +1,10 @@
+---
+
+- hosts: xwing
+  remote_user: "{{ os.ssh.user }}"
+  sudo: yes
+  roles:
+  - { role:  common }
+  - { role: user }
+  - { role: vnc }
+  - { role: games }

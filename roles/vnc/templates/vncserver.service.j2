@@ -1,0 +1,12 @@
+[Unit]
+Description=Remote desktop service (VNC)
+After=syslog.target network.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Environment="DISPLAY=:1"
+Type=forking
+User=root
+ExecStart=/bin/x0vncserver -PasswordFile={{ os.vnc.pwd_file }}

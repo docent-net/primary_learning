@@ -1,0 +1,7 @@
+- name: Install games
+  dnf: >
+    name={{ item }}
+    state=latest
+  with_items:
+  - tuxtype2
+  - gcompris

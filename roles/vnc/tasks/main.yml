@@ -1,0 +1,36 @@
+- name: Install and configure VNC server on 0 display
+  dnf: >
+    name=tigervnc-server
+    state=latest
+
+- name: Create unit file
+  template: >
+    src=vncserver.service.j2
+    dest=/etc/systemd/system/vncserver.service
+    owner=root
+    group=root
+    mode=0600
+    serole=object_r
+    seuser=system_u
+    setype=systemd_unit_file_t
+
+- name: Reload systemd
+  command: /bin/systemctl daemon-reload
+
+- name: Generate VNC password file
+  shell: echo "{{ user_password }}" | /bin/vncpasswd -f > {{ os.vnc.pwd_file }}
+
+- name: Generate RO VNC password
+  shell: echo "{{ user_password }}" | /bin/vncpasswd -f >> {{ os.vnc.pwd_file }}
+
+- name: Enable vnc service
+  service: >
+    name=vncserver
+    enabled=yes
+
+- name: Open FW port for VNC
+  firewalld: >
+    zone=public
+    port=5900-5920/tcp
+    permanent=true
+    state=enabled

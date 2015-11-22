@@ -1,0 +1,10 @@
+user_login: "enter_here_login_for_your_kid"
+user_password: "enter_here_password_for_your_kid_account"
+
+os:
+  vnc:
+    pwd_file: "/root/.vnc/passwd"
+  desktop:
+    resolution: "1024x600"
+  ssh:
+    user: "{{ remote_user }}"

@@ -1,0 +1,4 @@
+- name: Create user account for your kid
+  user: >
+    name={{ user_login }}
+    password={{ user_password }}
